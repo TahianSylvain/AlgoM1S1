@@ -14,7 +14,10 @@ pygame.display.set_caption("Swap Puzzle")
 
 # Create the puzzle grid
 grid = [[i + j * dim for i in range(dim)] for j in range(dim)]
-print()
+
+for inner_list in grid:
+    random.shuffle(inner_list)
+
 
 def draw_grid():
     for row in range(dim):
