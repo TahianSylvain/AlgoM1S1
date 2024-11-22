@@ -2,11 +2,14 @@
 
 import pygame
 from button_pygame import Button
+from input_text_pygame import TextInput
 
 #----CONSTANTS
 BACKGROUND_COLOR = (255, 255, 255)
 WHITE = (255, 255, 255)
+BLACK = (0,0,0)
 BLUE = (0, 0, 255)
+GRAY = (212, 207, 207)
 LIGHT_BLUE = (173, 216, 230)
 
 
@@ -27,47 +30,31 @@ button_rect = Button(150, 100, 100, 50, dummy_linked_function, "3x3", BLUE, LIGH
 
 button_rect2 = Button(400, 100, 100, 50, dummy_linked_function, "4x4", BLUE, LIGHT_BLUE, WHITE)  # x, y, width, height
 
+k_input = TextInput(200, 200, 200, 50, pygame.font.Font(None, 36), BLUE, WHITE, BLUE)
+
+# Event loop
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
             if button_rect.is_clicked():
                 print("Execution fonction 3x3")
+                button_rect.linked_function()
+
             elif button_rect2.is_clicked():
                 print("Execution fonction 4x4")
+                button_rect2.linked_function()
         
-        elif False:
-            pass
+        k_input.handle_event(event)
 
     # Draw the button
     button_rect.draw(screen)
     button_rect2.draw(screen)
+    k_input.draw(screen)
     
     pygame.display.update()
-
-
-    # Define button 
-# button_rect = pygame.Rect(150, 100, 100, 50)  # x, y, width, height
-# font = pygame.font.Font(None, 36)
-# text_surface = font.render("3", True, WHITE)
-
-# running = True
-# while running:
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             running = False
-#         elif event.type == pygame.MOUSEBUTTONDOWN:
-#             if button_rect.collidepoint(pygame.mouse.get_pos()):
-#                 print("3")
-
-#     # Draw the button
-#     screen.fill((0, 0, 0))  # Black background
-#     color = LIGHT_BLUE if button_rect.collidepoint(pygame.mouse.get_pos()) else BLUE
-#     pygame.draw.rect(screen, color, button_rect)
-#     screen.blit(text_surface, (button_rect.x + 10, button_rect.y + 10))
-
-#     pygame.display.update()
 
 pygame.quit()
