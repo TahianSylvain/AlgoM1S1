@@ -2,7 +2,7 @@ import pygame
 
 
 pygame.init()
-width, height, dim = 400, 400, 3
+width, height, dim = 400, 400, 4
 white = (255, 255, 255)
 black = (0, 0, 0)
 tile_size = width // dim
@@ -13,7 +13,7 @@ pygame.display.set_caption("Swap Puzzle")
 
 # Create the puzzle grid
 grid = [[i + j * dim for i in range(dim)] for j in range(dim)]
-print(grid)
+
 
 def draw_grid():
     for row in range(dim):
@@ -48,10 +48,8 @@ def handle_input():
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x, y = pygame.mouse.get_pos()
             row, col = y // tile_size, x // tile_size
-            print(row, col)
             if grid[row][col]:
-                print('Full')
-                permute_blank(x, y)
+                permute_blank(row, col)
                 draw_grid()
 
 
