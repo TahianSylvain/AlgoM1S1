@@ -5,7 +5,7 @@ Chaque partie du projet est fonctionnel séparément mais le projet n'est pas en
 - solveur 8 puzzle no swap: solver.py
 - GUI principal: main__GUI.py
 - GUI de jeu: puzzle_front.py avec la parametre dim a changer manuellement
-
+Il faut executer chaque fichier separement pour le moment.
 MEMBRES et ROLES:
 - Jamie, IGGLIA4 no 20 ----- Equipe Front Pygame ----- main__GUI.py
 - Bienvenue, ESIIA4 no 01 ----- Equipe Back Solver ----- solver.py
