@@ -9,30 +9,15 @@ import pandas as pd
 # For example, a row might look like:
 # pos1, pos2, ..., pos9, result
 # 1, 0, -1, 0, 1, 0, -1, 0, 1, 1  (X wins)
-# -1, 1, 0, 0, -1, 1, 0, 0, -1, -1 (O wins)
-# 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 (Draw)
+# -1, 1, 0, 0, -1, 1, 0, 0, -1, 0 (O wins or Draw)
+# 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 (O wins or Draw)
 
 # Example of how you might load data (replace with your actual data loading)
-# data = pd.read_csv('your_tic_tac_toe_data.csv')
+url = 'https://raw.githubusercontent.com/TahianSylvain/AlgoM1S1/main/FinalExam/tic_tac_toe_dataset.csv'
+data = pd.read_csv(url)
 
-# Let's create some dummy data for demonstration
-# This represents a few simple game states and their outcomes
-data = pd.DataFrame([
-    [1, 0, -1, 0, 1, 0, -1, 0, 1, 1],
-    [-1, 1, 0, 0, -1, 1, 0, 0, -1, -1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 1, -1, 0, 0, 0, 0, 0, 1], # X wins in the first row
-    [-1, -1, -1, 1, 0, 0, 0, 0, 0, -1], # O wins in the first row
-    [1, -1, 1, 0, 0, 0, -1, 0, -1, 1], # X wins diagonal
-    [-1, 1, -1, 0, 0, 0, 1, 0, 1, -1], # O wins diagonal
-    [1, 0, 0, 1, 0, 0, 1, 0, 0, 1], # X wins column
-    [-1, 0, 0, -1, 0, 0, -1, 0, 0, -1] # O wins column
-
-], columns=[f'pos{i}' for i in range(1, 10)] + ['result'])
-
-
-X = data[[f'pos{i}' for i in range(1, 10)]]
-y = data['result']
+X = data[[f'cell_{i}' for i in range(0, 9)]]
+y = data['label']
 
 # Initialize the Random Forest Classifier
 # You can adjust the n_estimators (number of trees) and other parameters
