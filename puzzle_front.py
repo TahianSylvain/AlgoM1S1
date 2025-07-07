@@ -1,8 +1,10 @@
 import pygame
+import random
 
+from main__GUI import dim
 
 pygame.init()
-width, height, dim = 400, 400, 4
+move, width, height = 5, 400, 400
 white = (255, 255, 255)
 black = (0, 0, 0)
 tile_size = width // dim
@@ -13,6 +15,9 @@ pygame.display.set_caption("Swap Puzzle")
 
 # Create the puzzle grid
 grid = [[i + j * dim for i in range(dim)] for j in range(dim)]
+
+for inner_list in grid:
+    random.shuffle(inner_list)
 
 
 def draw_grid():
@@ -28,16 +33,23 @@ def draw_grid():
                 screen.blit(text, text_rect)
 
 
+count = 0
 def permute_blank(row, col):
+    global count
+
     for i in range(dim):
         for j in range(dim):
             if grid[i][j] == 0:
                 blank_row, blank_col = i, j
 
-    # Check if the clicked cell is adjacent to the blank cell
     if abs(row - blank_row) + abs(col - blank_col) == 1:
-        # Swap the values
+        count += 1
         grid[blank_row][blank_col], grid[row][col] = grid[row][col], grid[blank_row][blank_col]
+
+
+
+def swap_fully_cells(): pass
+    
 
 
 def handle_input():
@@ -51,6 +63,8 @@ def handle_input():
             if grid[row][col]:
                 permute_blank(row, col)
                 draw_grid()
+                if count // move:
+                    swap_fully_cells()
 
 
 while True:

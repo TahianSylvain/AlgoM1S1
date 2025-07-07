@@ -35,16 +35,15 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if button_rect.is_clicked():
                 print("Execution fonction 3x3")
+                dim = 3; print("Veuiller fermer l'onglet")
             elif button_rect2.is_clicked():
                 print("Execution fonction 4x4")
-        
-        elif False:
-            pass
+                dim = 4; print("Veuiller fermer l'onglet")
 
     # Draw the button
     button_rect.draw(screen)
     button_rect2.draw(screen)
-    
+
     pygame.display.update()
 
 
