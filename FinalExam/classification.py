@@ -1,4 +1,5 @@
 import pandas as pd
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
@@ -22,3 +23,4 @@ y_pred = knn.predict(X_test)
 
 # Résultat
 print("Précision du modèle KNN :", accuracy_score(y_test, y_pred))
+joblib.dump(knn, "modele_knn_morpion.joblib")
