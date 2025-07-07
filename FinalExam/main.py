@@ -83,10 +83,15 @@ def check_winner():
 		return "Draw"
 	return None
 
+def model(): 
+	# max
+	return []  
+
 def bot_move():
 	empty = [(y, x) for y in range(3) for x in range(3) if board[y][x] is None]
 	if empty:
 		y, x = random.choice(empty)
+		# y, x = model(empty)
 		board[y][x] = "O"
 
 # === Menu ===
