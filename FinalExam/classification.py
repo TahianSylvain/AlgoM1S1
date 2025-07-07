@@ -16,6 +16,9 @@ df = encoder_plateau(df)
 #sépare les entrer (X) et (Y)
 X = df[[f"case{i}"for i in range(9)]]
 y = df["meilleur_coup"]
+
+# Remplacer les NaN (valeurs manquantes) par 0 (plateau vide)
+X = X.fillna(0)
     
 #entrainement de train/test
 X_train , X_test ,y_train ,y_test = train_test_split(X,y, test_size = 0.2)
