@@ -1,36 +1,24 @@
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 
-def encoder_plateau(df):
-    encoder = {"":0,"X":1,"0":-1}
-    for i in range(9):
-        df[f"case{i}"] = df[f"case{i}"].map(encoder)
-    return df
-    
-#apple du fichier csv et tranformation de valeur en nombre
+# Charger le dataset
 df = pd.read_csv("tic_tac_toe_dataset.csv")
-df = encoder_plateau(df)
-    
-#sépare les entrer (X) et (Y)
-X = df[[f"case{i}"for i in range(9)]]
-y = df["meilleur_coup"]
 
-# Remplacer les NaN (valeurs manquantes) par 0 (plateau vide)
-X = X.fillna(0)
-    
-#entrainement de train/test
-X_train , X_test ,y_train ,y_test = train_test_split(X,y, test_size = 0.2)
-    
-#création de knn
+# Séparer les features (X) et la cible (y)
+X = df[[f"cell_{i}" for i in range(9)]]   # colonnes : cell_0 à cell_8
+y = df["label"]                           # colonne cible
+
+# Découpage entraînement / test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Modèle KNN
 knn = KNeighborsClassifier(n_neighbors=3)
 knn.fit(X_train, y_train)
-    
-# Prédictions
+
+# Prédiction
 y_pred = knn.predict(X_test)
 
-# Précision
+# Résultat
 print("Précision du modèle KNN :", accuracy_score(y_test, y_pred))
-    
-
