@@ -10,7 +10,7 @@ def encoder_plateau(df):
     return df
     
 #apple du fichier csv et tranformation de valeur en nombre
-df = pd.read_csv("dataset_minimax_tictactoe.csv")
+df = pd.read_csv("tic_tac_toe_dataset.csv")
 df = encoder_plateau(df)
     
 #sépare les entrer (X) et (Y)
