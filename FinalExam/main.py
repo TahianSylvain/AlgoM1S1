@@ -1,6 +1,8 @@
 import pygame
-import sys
+import sys, joblib
 import random
+import numpy as np
+# from random_forest import convert_flat_index_to_2d, get_best_predictions_for_zeros
 
 pygame.init()
 
@@ -83,15 +85,31 @@ def check_winner():
 		return "Draw"
 	return None
 
-def model(): 
-	# max
-	return []  
+def translate():
+	numerical_flat_board = []
+	for row in board:
+		for cell in row:
+			if cell == 'X':
+				numerical_flat_board.append(1)
+			elif cell == 'O':
+				numerical_flat_board.append(-1)
+			else:   numerical_flat_board.append(0)
+	return np.array(numerical_flat_board) # [['O', 'X', 'O'], ['X', None, 'X'], ['X', 'O', None]]
+
+def model(empty):
+	knn = joblib.load("./modèle_knn_morpion.joblib")
+	move = get_best_predictions_for_zeros(translate(board), knn)
+	prediction = find_changed_position(board, move)
+	return convert_flat_index_to_2d(prediction) # [y, x]
 
 def bot_move():
 	empty = [(y, x) for y in range(3) for x in range(3) if board[y][x] is None]
 	if empty:
-		y, x = random.choice(empty)
-		# y, x = model(empty)
+		try: y, x = model(empty)
+		except Exception as e:
+			print(e)
+			y, x = random.choice(empty)
+		print(translate())
 		board[y][x] = "O"
 
 # === Menu ===
