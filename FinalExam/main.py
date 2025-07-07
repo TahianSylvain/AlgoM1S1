@@ -97,8 +97,15 @@ def translate():
 	return np.array(numerical_flat_board) # [['O', 'X', 'O'], ['X', None, 'X'], ['X', 'O', None]]
 
 def model(empty):
+	move = translate()
 	knn = joblib.load("./modèle_knn_morpion.joblib")
-	move = get_best_predictions_for_zeros(translate(board), knn)
+	knn_predictions = get_best_predictions_for_zeros(translate(), knn)
+	for possible_board, prediction in knn_predictions:
+		if prediction == 0:
+			print(f"Potential board state: {possible_board}, KNN Prediction: {prediction}")
+		else:
+			print(f"Potential board state: {possible_board}, KNN Prediction: {prediction}     WIN!!!")
+			move = possible_board
 	prediction = find_changed_position(board, move)
 	return convert_flat_index_to_2d(prediction) # [y, x]
 
@@ -109,7 +116,6 @@ def bot_move():
 		except Exception as e:
 			print(e)
 			y, x = random.choice(empty)
-		print(translate())
 		board[y][x] = "O"
 
 # === Menu ===
