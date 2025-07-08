@@ -12,4 +12,5 @@ MEMBRES et ROLES:
 - Notahiana, ESIIA4 no 05 ----- Equipe Front Pygame ----- main__GUI.py
 - Nirlain, ESIIA4 no 10 ----- Equipe Back Solver ----- solver.py
 - Manjato, ESIIA4 no 11 ----- Equipe Back Solver ----- solver.py
+- Césaire, ESIIA4 no 22 ----- Equipe Intégrateur ----- main__GUI.py
 - Andry, ESIIA4 no 25 ----- Equipe Front Pygame ----- puzzle_front.py
