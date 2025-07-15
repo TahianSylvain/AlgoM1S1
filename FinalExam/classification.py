@@ -23,4 +23,4 @@ y_pred = knn.predict(X_test)
 
 # Résultat
 print("Précision du modèle KNN :", accuracy_score(y_test, y_pred))
-joblib.dump(knn, "./modèle_knn_morpion.joblib")
+joblib.dump(knn, "modele_knn_morpion.joblib")
